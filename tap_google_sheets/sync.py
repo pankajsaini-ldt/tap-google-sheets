@@ -486,7 +486,10 @@ def sync(client, config, catalog, state):
 
                     # Initialize paging for 1st batch
                     is_last_row = False
-                    batch_rows = 200
+                    if config.get('batch_rows'):
+                        batch_rows = config.get('batch_rows')
+                    else:
+                        batch_rows = 200
                     from_row = 2
                     if sheet_max_row < batch_rows:
                         to_row = sheet_max_row
